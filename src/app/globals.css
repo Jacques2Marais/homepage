@@ -2,26 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+    html, body, html *, body * {
+        cursor: none;
+    }
+
+    body {
+        @apply bg-sky-950 text-white/90;
+        font-family: var(--font-inter);
+
+        min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold;
+    }
+
+    h1 {
+        &.xl {
+            @apply xl:text-[8rem] xl:leading-[8.5rem] lg:text-8xl md:text-6xl text-4xl;
+        }
+    }
+
+    h5 {
+        @apply text-xl;
+    }
+
+    section {
+        @apply p-4 px-24;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@layer utilities {
+    .serif {
+        font-family: var(--font-lora);
+    }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+    .top-nav-item {
+        @apply font-bold text-xl transition-all duration-500 relative px-1;
+
+        a {
+            @apply h-full scale-100 transition-transform flex text-center items-center;
+        }
+
+        &::after {
+            content: '';
+            @apply bg-black/80 absolute w-[80%] left-[10%] -bottom-0.5 h-1 scale-0 transition-all rounded-full;
+        }
+
+        /* svg {
+            @apply relative left-2 scale-0 transition-all;
+        } */
+
+        &:hover {
+            /* svg {
+                @apply scale-100 -left-0.5;
+            } */
+
+            a {
+                @apply scale-90;
+            }
+
+            &::after {
+                @apply scale-100;
+            }
+        }
+    }
+
+    @keyframes rocket {
+        0% {
+            @apply rotate-45;
+        }
+
+        10% {
+            @apply rotate-[360deg];
+        }
+
+        11% {
+            @apply rotate-0;
+        }
+
+        20% {
+            @apply rotate-45;
+        }
+
+        30% {
+            @apply rotate-[360deg];
+        }
+    }
+
+    .rocket-animation {
+        @apply rotate-45 inline-block;
+        animation: rocket 5s;
+    }
+}
+
+#custom-cursor {
+    @apply transition-[padding] fixed p-3 bg-red-500/80 rounded-full z-[100] pointer-events-none;
+}
+
+#custom-cursor.clicked {
+    @apply p-4;
+}
+
+.pointer-icon {
+    @apply absolute block transition-transform;
+}
+
+.custom-pointer-show {
+    @apply duration-300 scale-100;
+}
+
+.pointer-def {
+    @apply rotate-0;
+}
+
+.pointer-def.custom-pointer-show {
+    @apply rotate-[360deg];
+}
+
+.pointer-click {
+    @apply rotate-[360deg];
+}
+
+.pointer-click.custom-pointer-show {
+    @apply rotate-[0];
+}
+
+.custom-pointer-hide {
+    @apply scale-0;
 }
