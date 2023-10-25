@@ -3,12 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-    html, body, html *, body * {
-        cursor: none;
-    }
-
     body {
-        @apply bg-sky-950 text-white/90;
+        @apply bg-gray-900 text-white/90;
         font-family: var(--font-inter);
 
         min-height: 100vh;
